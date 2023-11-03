@@ -1,0 +1,8 @@
+django
+djangorestframework
+django-livereload-server
+django-filter
+django-cors-headers
+jsonfield
+markdown
+pylint
