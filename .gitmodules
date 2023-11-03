@@ -1,0 +1,3 @@
+[submodule "cassiecodes-frontend"]
+	path = cassiecodes-frontend
+	url = https://github.com/cassandra-codes/cassiecodes-frontend.git
