@@ -6,6 +6,7 @@ services:
     volumes:
       - ./backend:/backend
     command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    image: 505093077290.dkr.ecr.us-east-1.amazonaws.com/cassiecodes-backend:latest
 
   frontend:
     build: ./frontend
@@ -13,3 +14,4 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/frontend
+    image: 505093077290.dkr.ecr.us-east-1.amazonaws.com/cassiecodes-frontend:latest
