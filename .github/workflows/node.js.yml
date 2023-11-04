@@ -30,7 +30,7 @@ jobs:
         # cache: 'npm'
 
     - name: Install dependencies
-      run: npm install
+      run: npm i
       working-directory: frontend
 
     - name: Build project
