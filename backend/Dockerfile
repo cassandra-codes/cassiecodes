@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 
 ENV DJANGO_SETTINGS_MODULE=cassiecodes.settings
 
-WORKDIR /api
+WORKDIR /backend
 
 RUN pip install django djangorestframework django-livereload-server django-filter django-cors-headers jsonfield markdown pylint
 
