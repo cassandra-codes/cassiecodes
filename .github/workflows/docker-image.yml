@@ -1,12 +1,11 @@
-name: Build and Deploy Docker Images to Amazon ECR
-
+name: Build Docker Images
 on:
   pull_request:
     branches: [ "main" ]
 
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +23,7 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build and Push Frontend
+    - name: Build Frontend
       id: build-frontend
       env:
         ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
@@ -36,7 +35,7 @@ jobs:
         docker build -t cassiecodes-frontend .
       working-directory: ./frontend
 
-    - name: Build and Push Backend
+    - name: Build Backend
       id: build-backend
       env:
         ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
