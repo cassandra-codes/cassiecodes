@@ -3,8 +3,6 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -27,7 +25,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build and Push Frontend
-      id: build-image
+      id: build-frontend
       env:
         ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
       run: |
@@ -42,3 +40,20 @@ jobs:
         docker push $ECR_REGISTRY/cassiecodes-frontend:latest
         echo "Done."
       working-directory: ./frontend
+
+    - name: Build and Push Backend
+      id: build-backend
+      env:
+        ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+      run: |
+        echo "Retrieving ECR token"
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REGISTRY
+        # Build a docker container and push it to ECR 
+        echo "Building backend docker image"
+        docker build -t cassiecodes-backend .
+        echo "Tagging backend image"
+        docker tag cassiecodes-backend:latest $ECR_REGISTRY/cassiecodes-backend:latest
+        echo "Pushing backend to ECR..."
+        docker push $ECR_REGISTRY/cassiecodes-backend:latest
+        echo "Done."
+      working-directory: ./backend
