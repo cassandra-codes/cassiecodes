@@ -10,12 +10,12 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm install
 RUN npm install react-scripts@3.4.1
-RUN npm build run
 
 # add app
 COPY . ./
 
+EXPOSE 3000
+
 # start app
 CMD ["npm", "start"]
 
-EXPOSE 3000
