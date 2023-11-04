@@ -24,6 +24,9 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
       with:
         mask-password: true
+      env:
+        AWS_DEFAULT_REGION: us-east-1
+        AWS_REGION: us-east-1
 
     - name: Build Frontend
       id: build-frontend
